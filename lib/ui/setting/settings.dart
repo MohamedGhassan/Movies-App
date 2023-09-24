@@ -29,6 +29,7 @@ class Settings extends StatefulWidget {
   int? posty;
   int? postx;
   int? selectedItem;
+
   // Image? image;
   bool? logged;
   Image? image = Image.asset("assets/images/profile.jpg");
@@ -81,22 +82,24 @@ class _SettingsState extends State<Settings> {
 
     });
   }
+
   getLogged2() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    logged =  prefs.getBool("LOGGED_USER");
+    logged = prefs.getBool("LOGGED_USER");
 
-    if(logged == true) {
+    if (logged == true) {
       String? img = prefs.getString("IMAGE_USER");
-      image = Image.network( img!);
-      name =  prefs.getString("NAME_USER")!;
-      email =  prefs.getString("USERNAME_USER")!;
-      type =  prefs.getString("TYPE_USER")!;
-      subscribe =  (prefs.getString("NEW_SUBSCRIBE_ENABLED") ==  "FALSE")? false:true;
+      image = Image.network(img!);
+      name = prefs.getString("NAME_USER")!;
+      email = prefs.getString("USERNAME_USER")!;
+      type = prefs.getString("TYPE_USER")!;
+      subscribe =
+      (prefs.getString("NEW_SUBSCRIBE_ENABLED") == "FALSE") ? false : true;
       setState(() {
 
       });
-    }else{
+    } else {
       logged = false;
       image = Image.asset("assets/images/profile.jpg");
     }
@@ -104,6 +107,7 @@ class _SettingsState extends State<Settings> {
 
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -114,6 +118,7 @@ class _SettingsState extends State<Settings> {
       FocusScope.of(context).requestFocus(main_focus_node);
     });
   }
+
   // String name = "";
   @override
   Widget build(BuildContext context) {
@@ -243,8 +248,11 @@ class _SettingsState extends State<Settings> {
                         Container(
                           decoration: BoxDecoration(color: Colors.black54,),
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 75, bottom: 20),
+                            padding: EdgeInsets.only(
+                                left: 20,
+                                right: 20,
+                                top: Responsive.isMobile(context) ? 75 : 30,
+                                bottom: 20),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               // mainAxisAlignment: MainAxisAlignment.start,
@@ -266,7 +274,8 @@ class _SettingsState extends State<Settings> {
                                             Duration(milliseconds: 200), () {
                                           Navigator.push(context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>Profile()));
+                                                  builder: (context) =>
+                                                      Auth()));
                                           // PageRouteBuilder(
                                           //   pageBuilder: (context, animation1, animation2) => Auth(),
                                           //   transitionDuration: Duration(seconds: 0),
@@ -297,22 +306,24 @@ class _SettingsState extends State<Settings> {
                                           // );
                                           Navigator.push(context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>Profile()));
+                                                  builder: (context) =>
+                                                      Profile()));
                                         });
                                       }
                                     });
                                   },
                                   child: GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       setState(() {
                                         widget.postx = 7;
                                         widget.posty = -2;
-                                        if(widget.logged ==  true){
-
-                                          Future.delayed(Duration(milliseconds: 200),(){
+                                        if (widget.logged == true) {
+                                          Future.delayed(
+                                              Duration(milliseconds: 200), () {
                                             Navigator.push(context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>Profile()));
+                                                    builder: (context) =>
+                                                        Auth()));
                                             // PageRouteBuilder(
                                             //   pageBuilder: (context, animation1, animation2) => Profile(),
                                             //   transitionDuration: Duration(seconds: 0),
@@ -326,24 +337,26 @@ class _SettingsState extends State<Settings> {
                                             //   ),
                                             // );
                                           });
-                                        }else{
+                                          /// هاد السطر لما بدي اسجل بخليه اوث، هو الي بس بلعب فيه
+                                        } else {
                                           Navigator.push(context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>Profile()));
+                                                  builder: (context) =>
+                                                      Auth()));
                                           // PageRouteBuilder(
                                           //   pageBuilder: (context, animation1, animation2) => Auth(),
                                           //   transitionDuration: Duration(seconds: 0),
                                           // );
-                                          Future.delayed(Duration(milliseconds: 200),(){
-
-                                            // push(
-                                            //   context,
-                                            //   PageRouteBuilder(
-                                            //     pageBuilder: (context, animation1, animation2) => Auth(),
-                                            //     transitionDuration: Duration(seconds: 0),
-                                            //   ),
-                                            // );
-                                          });
+                                          // Future.delayed(
+                                          //     Duration(milliseconds: 200), () {
+                                          //   Navigator.push(
+                                          //     context,
+                                          //     PageRouteBuilder(
+                                          //       pageBuilder: (context, animation1, animation2) => Profile(),
+                                          //       transitionDuration: Duration(seconds: 0),
+                                          //     ),
+                                          //   );
+                                          // });
                                         }
                                       });
                                     },
@@ -352,17 +365,42 @@ class _SettingsState extends State<Settings> {
                                         borderRadius: BorderRadius.circular(5),
                                         boxShadow: [
                                           BoxShadow(
-                                              color:Colors.white.withOpacity(0.4),
-                                              offset: Offset(0,0),
+                                              color: Colors.white.withOpacity(
+                                                  0.4),
+                                              offset: Offset(0, 0),
                                               blurRadius: 5
                                           ),
                                         ],
                                       ),
-                                      height: 50,
-                                      child: ClipRRect(
-                                          child: image,
-                                          borderRadius:  BorderRadius.circular(5)
+                                      height: Responsive.isMobile(context)
+                                          ? 50
+                                          : 80,
+                                      child:
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.white.withOpacity(
+                                                    0.4),
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5
+                                            ),
+                                          ],),
+                                        // height: Responsive.isMobile(context)
+                                        //     ? 50
+                                        // : 100,
+                                        child: Image(
+                                          image: AssetImage(
+                                              'assets/images/myimage.jpg'),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
+                                      // ClipRRect(
+                                      //     child: image,
+                                      //     borderRadius:  BorderRadius.circular(5)
+                                      // ),
                                     ),
                                   ),
                                 ),
@@ -373,7 +411,7 @@ class _SettingsState extends State<Settings> {
                                   width: 10,
                                 ),
                                 Text(
-                                  name.toUpperCase(),
+                                  name,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.white,
@@ -389,8 +427,8 @@ class _SettingsState extends State<Settings> {
                                     child: IconButton(icon: Icon(
                                       Icons.close,
                                       color: Colors.black,
-                                      size: 15,
-                                      // size: Responsive.isMobile(context) ? 20 : 25,
+                                      // size: 15,
+                                      size: Responsive.isMobile(context) ? 15 : 25,
                                     ), onPressed: () {
                                       Navigator.pop(context);
                                     },
@@ -592,7 +630,8 @@ class _SettingsState extends State<Settings> {
                                           Duration(milliseconds: 200), () {
                                         Navigator.push(context,
                                             MaterialPageRoute(
-                                                builder: (context) =>Profile()));
+                                                builder: (context) =>
+                                                    Auth()));
                                         // push(
                                         //   context,
                                         //   PageRouteBuilder(
@@ -615,14 +654,16 @@ class _SettingsState extends State<Settings> {
                                         // );
                                         Navigator.push(context,
                                             MaterialPageRoute(
-                                                builder: (context) =>Profile()));
+                                                builder: (context) =>
+                                                    Profile()));
                                       });
                                     }
                                   });
                                 },
                                 child: ListTile(
                                   leading: Icon(
-                                    Icons.person_outline_outlined, color: Colors.white,
+                                    Icons.person_outline_outlined,
+                                    color: Colors.white,
                                     size: 25,),
                                   title: Text("My Profile", style: TextStyle(
                                       color: (widget.selectedItem == 5) ? Colors
@@ -645,7 +686,8 @@ class _SettingsState extends State<Settings> {
                                           Duration(milliseconds: 200), () {
                                         Navigator.push(context,
                                             MaterialPageRoute(
-                                                builder: (context) => MyList()));
+                                                builder: (context) =>
+                                                    MyList()));
                                         // push(
                                         //   context,
                                         //   PageRouteBuilder(
@@ -695,7 +737,8 @@ class _SettingsState extends State<Settings> {
                                           Duration(milliseconds: 200), () {
                                         Navigator.push(context,
                                             MaterialPageRoute(
-                                                builder: (context) => Subscriptions()));
+                                                builder: (context) =>
+                                                    Subscriptions()));
                                         // push(
                                         //   context,
                                         //   PageRouteBuilder(

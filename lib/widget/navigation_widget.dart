@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tv/responsive.dart';
 import 'package:flutter_app_tv/ui/auth/auth.dart';
 import 'package:flutter_app_tv/ui/auth/profile.dart';
 import 'package:flutter_app_tv/ui/search/search.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../responsive.dart';
 import '../ui/channel/channels.dart';
 import '../ui/home/home.dart';
 import '../ui/home/mylist.dart';
@@ -68,13 +68,12 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
       child: Container(
           child: Container(
             margin: EdgeInsets.only(
-                left: Responsive.isMobile(context) ? 20 : 20,
-                right: Responsive.isMobile(context) ? 20 : 20,
-                top: Responsive.isMobile(context) ? 15
-                    : 10,
+              left: Responsive.isMobile(context) ? 20 : 20,
+              right: Responsive.isMobile(context) ? 20 : 20,
+              top: Responsive.isMobile(context) ? 15 : 10,
               // top: Responsive.isMobile(context) ? 15
               //       : 10,
-                bottom: Responsive.isMobile(context) ? 10 : 10,
+              bottom: Responsive.isMobile(context) ? 10 : 10,
             ),
             height: 130.h,
             child: Row(
@@ -105,7 +104,7 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                                   PageRouteBuilder(
                                     pageBuilder:
                                         (context, animation1, animation2) =>
-                                            Search(),
+                                        Search(),
                                     transitionDuration: Duration(seconds: 0),
                                   ),
                                 );
@@ -121,11 +120,11 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                               borderRadius: BorderRadius.circular(20),
                               color: (widget.selectedItem == 0)
                                   ? (widget.posty == -2 && widget.postx == 0)
-                                      ? Colors.white
-                                      : Colors.white70
+                                  ? Colors.white
+                                  : Colors.white70
                                   : (widget.posty == -2 && widget.postx == 0)
-                                      ? Colors.white24
-                                      : Colors.transparent,
+                                  ? Colors.white24
+                                  : Colors.transparent,
                             ),
                             child: Row(
                               children: [
@@ -135,9 +134,9 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                                   color: (widget.selectedItem == 0)
                                       ? Colors.black
                                       : (widget.posty == -2 &&
-                                              widget.postx == 0)
-                                          ? Colors.white
-                                          : Colors.white60,
+                                      widget.postx == 0)
+                                      ? Colors.white
+                                      : Colors.white60,
                                 ),
                                 SizedBox(width: 5),
                                 Text(
@@ -146,9 +145,9 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                                       color: (widget.selectedItem == 0)
                                           ? Colors.black
                                           : (widget.posty == -2 &&
-                                                  widget.postx == 0)
-                                              ? Colors.white
-                                              : Colors.white60,
+                                          widget.postx == 0)
+                                          ? Colors.white
+                                          : Colors.white60,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -156,198 +155,298 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                             ),
                           ),
                         ),
-                        Responsive.isDesktop(context) ?
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      widget.postx = 1;
-                                      widget.posty = -2;
-                                      Future.delayed(Duration(milliseconds: 200),(){
-                                        if(widget.selectedItem != 1){
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => Home(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        }
-                                      });
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 7,vertical: 1),
-                                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:(widget.selectedItem == 1)? (widget.posty == -2 && widget.postx == 1)?Colors.white:Colors.white70:(widget.posty == -2 && widget.postx == 1)?Colors.white24:Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "Home",
-                                      style: TextStyle(
-                                          color:(widget.selectedItem == 1)?Colors.black:(widget.posty == -2 && widget.postx == 1)?Colors.white:Colors.white60,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500
-                                      ),
-                                    ),
-                                  ),
+                        Responsive.isMobile(context)
+                            ? Container()
+                            : Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.postx = 1;
+                                  widget.posty = -2;
+                                  Future.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    if (widget.selectedItem != 1) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              Home(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (widget.selectedItem == 1)
+                                      ? (widget.posty == -2 &&
+                                      widget.postx == 1)
+                                      ? Colors.white
+                                      : Colors.white70
+                                      : (widget.posty == -2 &&
+                                      widget.postx == 1)
+                                      ? Colors.white24
+                                      : Colors.transparent,
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      widget.postx = 2;
-                                      widget.posty = -2;
-                                      Future.delayed(Duration(milliseconds: 200),(){
-                                        if(widget.selectedItem != 2){
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => Movies(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        }
-                                      });
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 7,vertical: 1),
-                                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:(widget.selectedItem == 2)? (widget.posty == -2 && widget.postx == 2)?Colors.white:Colors.white70:(widget.posty == -2 && widget.postx == 2)?Colors.white24:Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "Movies",
-                                      style: TextStyle(
-                                          color:(widget.selectedItem == 2)?Colors.black:(widget.posty == -2 && widget.postx == 2)?Colors.white:Colors.white60,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500
-                                      ),
-                                    ),
-                                  ),
+                                child: Text(
+                                  "Home",
+                                  style: TextStyle(
+                                      color: (widget.selectedItem == 1)
+                                          ? Colors.black
+                                          : (widget.posty == -2 &&
+                                          widget.postx == 1)
+                                          ? Colors.white
+                                          : Colors.white60,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      widget.postx = 3;
-                                      widget.posty = -2;
-                                      Future.delayed(Duration(milliseconds: 200),(){
-                                        if(widget.selectedItem != 3){
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => Series(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        }
-                                      });
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 7,vertical: 1),
-                                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:(widget.selectedItem == 3)? (widget.posty == -2 && widget.postx == 3)?Colors.white:Colors.white70:(widget.posty == -2 && widget.postx == 3)?Colors.white24:Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "Shows",
-                                      style: TextStyle(
-                                          color:(widget.selectedItem == 3)?Colors.black:(widget.posty == -2 && widget.postx == 3)?Colors.white:Colors.white60,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500
-                                      ),
-                                    ),
-                                  ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.postx = 2;
+                                  widget.posty = -2;
+                                  Future.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    if (widget.selectedItem != 2) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              Movies(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (widget.selectedItem == 2)
+                                      ? (widget.posty == -2 &&
+                                      widget.postx == 2)
+                                      ? Colors.white
+                                      : Colors.white70
+                                      : (widget.posty == -2 &&
+                                      widget.postx == 2)
+                                      ? Colors.white24
+                                      : Colors.transparent,
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      widget.postx = 4;
-                                      widget.posty = -2;
-                                      Future.delayed(Duration(milliseconds: 200),(){
-                                        if(widget.selectedItem != 4){
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => Channels(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        }
-                                      });
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 7,vertical: 1),
-                                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:(widget.selectedItem == 4)? (widget.posty == -2 && widget.postx == 4)?Colors.white:Colors.white70:(widget.posty == -2 && widget.postx == 4)?Colors.white24:Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "Live TV",
-                                      style: TextStyle(
-                                          color:(widget.selectedItem == 4)?Colors.black:(widget.posty == -2 && widget.postx == 4)?Colors.white:Colors.white60,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500
-                                      ),
-                                    ),
-                                  ),
+                                child: Text(
+                                  "Movies",
+                                  style: TextStyle(
+                                      color: (widget.selectedItem == 2)
+                                          ? Colors.black
+                                          : (widget.posty == -2 &&
+                                          widget.postx == 2)
+                                          ? Colors.white
+                                          : Colors.white60,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      widget.postx = 5;
-                                      widget.posty = -2;
-                                      if(widget.logged != true){
-                                        Future.delayed(Duration(milliseconds: 200),(){
-                                          push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => Auth(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        });
-                                      }else{
-                                        Future.delayed(Duration(milliseconds: 200),(){
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation1, animation2) => MyList(),
-                                              transitionDuration: Duration(seconds: 0),
-                                            ),
-                                          );
-                                        });
-                                      }
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 7,vertical: 1),
-                                    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:(widget.selectedItem == 5)? (widget.posty == -2 && widget.postx == 5)?Colors.white:Colors.white70:(widget.posty == -2 && widget.postx == 5)?Colors.white24:Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "My List",
-                                      style: TextStyle(
-                                          color:(widget.selectedItem == 5)?Colors.black:(widget.posty == -2 && widget.postx == 5)?Colors.white:Colors.white60,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500
-                                      ),
-                                    ),
-                                  ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.postx = 3;
+                                  widget.posty = -2;
+                                  Future.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    if (widget.selectedItem != 3) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              Series(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (widget.selectedItem == 3)
+                                      ? (widget.posty == -2 &&
+                                      widget.postx == 3)
+                                      ? Colors.white
+                                      : Colors.white70
+                                      : (widget.posty == -2 &&
+                                      widget.postx == 3)
+                                      ? Colors.white24
+                                      : Colors.transparent,
                                 ),
-                              ],
-                            )
+                                child: Text(
+                                  "Shows",
+                                  style: TextStyle(
+                                      color: (widget.selectedItem == 3)
+                                          ? Colors.black
+                                          : (widget.posty == -2 &&
+                                          widget.postx == 3)
+                                          ? Colors.white
+                                          : Colors.white60,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.postx = 4;
+                                  widget.posty = -2;
+                                  Future.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    if (widget.selectedItem != 4) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              Channels(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (widget.selectedItem == 4)
+                                      ? (widget.posty == -2 &&
+                                      widget.postx == 4)
+                                      ? Colors.white
+                                      : Colors.white70
+                                      : (widget.posty == -2 &&
+                                      widget.postx == 4)
+                                      ? Colors.white24
+                                      : Colors.transparent,
+                                ),
+                                child: Text(
+                                  "Live TV",
+                                  style: TextStyle(
+                                      color: (widget.selectedItem == 4)
+                                          ? Colors.black
+                                          : (widget.posty == -2 &&
+                                          widget.postx == 4)
+                                          ? Colors.white
+                                          : Colors.white60,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.postx = 5;
+                                  widget.posty = -2;
+                                  if (widget.logged != true) {
+                                    Future.delayed(
+                                        Duration(milliseconds: 200), () {
+                                      push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              Auth(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    });
+                                  } else {
+                                    Future.delayed(
+                                        Duration(milliseconds: 200), () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context,
+                                              animation1,
+                                              animation2) =>
+                                              MyList(),
+                                          transitionDuration:
+                                          Duration(seconds: 0),
+                                        ),
+                                      );
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 1),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (widget.selectedItem == 5)
+                                      ? (widget.posty == -2 &&
+                                      widget.postx == 5)
+                                      ? Colors.white
+                                      : Colors.white70
+                                      : (widget.posty == -2 &&
+                                      widget.postx == 5)
+                                      ? Colors.white24
+                                      : Colors.transparent,
+                                ),
+                                child: Text(
+                                  "My List",
+                                  style: TextStyle(
+                                      color: (widget.selectedItem == 5)
+                                          ? Colors.black
+                                          : (widget.posty == -2 &&
+                                          widget.postx == 5)
+                                          ? Colors.white
+                                          : Colors.white60,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
 
-                        : Container()
                         // GestureDetector(
                         //   onTap: (){
                         //     setState(() {
@@ -538,8 +637,7 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()
-                  {
+                  onTap: () {
                     setState(() {
                       widget.postx = 6;
                       widget.posty = -2;
@@ -641,10 +739,10 @@ class _NavigationWidgetState extends ResumableState<NavigationWidget> {
           ),
           decoration: BoxDecoration(
               gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black87, Colors.black54, Colors.transparent],
-          ))),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.black87, Colors.black54, Colors.transparent],
+              ))),
     );
   }
 }

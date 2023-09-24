@@ -1,7 +1,6 @@
 import 'dart:convert' as convert;
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_tv/api/api_rest.dart';
@@ -63,7 +62,7 @@ class _SeriesState extends ResumableState<Series> {
 
   int _selected_genre = 0;
 
-  int _series_element_by_line = 3;
+  int _series_element_by_line = 8;
 
   ItemScrollController _scrollController = ItemScrollController();
   ItemScrollController _genresScrollController = ItemScrollController();
@@ -133,10 +132,10 @@ class _SeriesState extends ResumableState<Series> {
       }
     }
     _scrollControllers.clear();
-    for (int jndex = 0; jndex < ((series.length / 3).ceil()); jndex++) {
-      int items_line_count = (series.length - ((jndex + 1) * 3) > 0)
-          ? 3
-          : (series.length - (jndex * 3)).abs();
+    for (int jndex = 0; jndex < ((series.length / 8).ceil()); jndex++) {
+      int items_line_count = (series.length - ((jndex + 1) * 8) > 0)
+          ? 8
+          : (series.length - (jndex * 8)).abs();
 
       ItemScrollController controller = new ItemScrollController();
       _scrollControllers.add(controller);
@@ -167,10 +166,10 @@ class _SeriesState extends ResumableState<Series> {
       }
     }
     _scrollControllers.clear();
-    for (int jndex = 0; jndex < ((series.length / 3).ceil()); jndex++) {
-      int items_line_count = (series.length - ((jndex + 1) * 3) > 0)
-          ? 3
-          : (series.length - (jndex * 3)).abs();
+    for (int jndex = 0; jndex < ((series.length / 8).ceil()); jndex++) {
+      int items_line_count = (series.length - ((jndex + 1) * 8) > 0)
+          ? 8
+          : (series.length - (jndex * 8)).abs();
 
       ItemScrollController controller = new ItemScrollController();
       _scrollControllers.add(controller);
@@ -193,10 +192,10 @@ class _SeriesState extends ResumableState<Series> {
       }
     }
     _scrollControllers.clear();
-    for (int jndex = 0; jndex < ((series.length / 3).ceil()); jndex++) {
-      int items_line_count = (series.length - ((jndex + 1) * 3) > 0)
-          ? 3
-          : (series.length - (jndex * 3)).abs();
+    for (int jndex = 0; jndex < ((series.length / 8).ceil()); jndex++) {
+      int items_line_count = (series.length - ((jndex + 1) * 8) > 0)
+          ? 8
+          : (series.length - (jndex * 8)).abs();
 
       ItemScrollController controller = new ItemScrollController();
       _scrollControllers.add(controller);
@@ -275,7 +274,7 @@ class _SeriesState extends ResumableState<Series> {
                   } else if (posty == -1) {
                     print("go to menu");
                     posty--;
-                    postx = 3;
+                    postx = 8;
                   } else if (posty == 0) {
                     print("go to slide");
                     posty--;
@@ -283,7 +282,7 @@ class _SeriesState extends ResumableState<Series> {
                   } else {
                     posty--;
                     _scrollToIndexXY(postx, posty);
-                    _focused_poster = ((posty * 3) + postx);
+                    _focused_poster = ((posty * 8) + postx);
                   }
                   break;
                 case KEY_DOWN:
@@ -304,7 +303,7 @@ class _SeriesState extends ResumableState<Series> {
                         : _focused_genre++;
                     break;
                   }
-                  if ((series.length / 3).ceil() - 1 == posty) {
+                  if ((series.length / 8).ceil() - 1 == posty) {
                     print("playing sound ");
                   } else {
                     posty++;
@@ -313,11 +312,11 @@ class _SeriesState extends ResumableState<Series> {
                         postx = _counts_x_line_saver[posty] - 1;
                       }
                       _scrollToIndexXY(postx, posty);
-                      _focused_poster = ((posty * 3) + postx);
+                      _focused_poster = ((posty * 8) + postx);
                     } else {
                       postx = 0;
                     }
-                    if (posty == (series.length / 3).ceil() - 3) {
+                    if (posty == (series.length / 8).ceil() - 8) {
                       _loadMore();
                     }
                   }
@@ -351,7 +350,7 @@ class _SeriesState extends ResumableState<Series> {
                       postx--;
                       _scrollToIndexXY(postx, posty);
                     }
-                    _focused_poster = ((posty * 3) + postx);
+                    _focused_poster = ((posty * 8) + postx);
                   }
                   break;
                 case KEY_RIGHT:
@@ -384,7 +383,7 @@ class _SeriesState extends ResumableState<Series> {
                         postx++;
                         _scrollToIndexXY(postx, posty);
                       }
-                      _focused_poster = ((posty * 3) + postx);
+                      _focused_poster = ((posty * 8) + postx);
 
                       break;
                   }
@@ -411,14 +410,14 @@ class _SeriesState extends ResumableState<Series> {
                     right: 0,
                     // top: 0,
                     top: Responsive.isMobile(context)
-                        ? MediaQuery.of(context).size.height / 5.5
-                        : 0,
+                        ? MediaQuery.of(context).size.height / 7.0
+                        : 0.0,
                     // left: MediaQuery.of(context).size.width / 4,
                     // bottom: MediaQuery.of(context).size.height / 4,
-                    left: MediaQuery.of(context).size.width / 40.sw,
+                    // left: MediaQuery.of(context).size.width / 40.sw,
                     bottom: Responsive.isMobile(context)
-                        ? MediaQuery.of(context).size.height / 2.18
-                        : MediaQuery.of(context).size.height,
+                        ? MediaQuery.of(context).size.height / 2.15
+                        : MediaQuery.of(context).size.height / 2.15,
                     child: CachedNetworkImage(
                         imageUrl: series[_focused_poster].cover,
                         fit: BoxFit.cover,
@@ -450,7 +449,7 @@ class _SeriesState extends ResumableState<Series> {
                 bottom: 0,
                 child: Container(
                     height: MediaQuery.of(context).size.height -
-                        (MediaQuery.of(context).size.height / 3),
+                        (MediaQuery.of(context).size.height / 8),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                       begin: Alignment.bottomCenter,

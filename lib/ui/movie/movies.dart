@@ -154,10 +154,10 @@ class _MoviesState extends ResumableState<Movies> {
       }
     }
     _scrollControllers.clear();
-    for (int jndex = 0; jndex < ((movies.length / 3).ceil()); jndex++) {
-      int items_line_count = (movies.length - ((jndex + 1) * 3) > 0)
-          ? 3
-          : (movies.length - (jndex * 3)).abs();
+    for (int jndex = 0; jndex < ((movies.length / 8).ceil()); jndex++) {
+      int items_line_count = (movies.length - ((jndex + 1) * 8) > 0)
+          ? 8
+          : (movies.length - (jndex * 8)).abs();
 
       ItemScrollController controller = new ItemScrollController();
       _scrollControllers.add(controller);
@@ -180,10 +180,10 @@ class _MoviesState extends ResumableState<Movies> {
       }
     }
     _scrollControllers.clear();
-    for (int jndex = 0; jndex < ((movies.length / 3).ceil()); jndex++) {
-      int items_line_count = (movies.length - ((jndex + 1) * 3) > 0)
-          ? 3
-          : (movies.length - (jndex * 3)).abs();
+    for (int jndex = 0; jndex < ((movies.length / 8).ceil()); jndex++) {
+      int items_line_count = (movies.length - ((jndex + 1) * 8) > 0)
+          ? 8
+          : (movies.length - (jndex * 8)).abs();
 
       ItemScrollController controller = new ItemScrollController();
       _scrollControllers.add(controller);
@@ -214,7 +214,7 @@ class _MoviesState extends ResumableState<Movies> {
                 event.data is RawKeyEventDataAndroid) {
               RawKeyDownEvent rawKeyDownEvent = event;
               RawKeyEventDataAndroid rawKeyEventDataAndroid =
-                  rawKeyDownEvent.data as RawKeyEventDataAndroid;
+              rawKeyDownEvent.data as RawKeyEventDataAndroid;
 
               switch (rawKeyEventDataAndroid.keyCode) {
                 case KEY_CENTER:
@@ -267,7 +267,7 @@ class _MoviesState extends ResumableState<Movies> {
                   } else {
                     posty--;
                     _scrollToIndexXY(postx, posty);
-                    _focused_poster = ((posty * 3) + postx);
+                    _focused_poster = ((posty * 8) + postx);
                   }
                   break;
                 case KEY_DOWN:
@@ -288,7 +288,7 @@ class _MoviesState extends ResumableState<Movies> {
                         : _focused_genre++;
                     break;
                   }
-                  if ((movies.length / 3).ceil() - 1 == posty) {
+                  if ((movies.length / 8).ceil() - 1 == posty) {
                     print("playing sound ");
                   } else {
                     posty++;
@@ -297,11 +297,11 @@ class _MoviesState extends ResumableState<Movies> {
                         postx = _counts_x_line_saver[posty] - 1;
                       }
                       _scrollToIndexXY(postx, posty);
-                      _focused_poster = ((posty * 3) + postx);
+                      _focused_poster = ((posty * 8) + postx);
                     } else {
                       postx = 0;
                     }
-                    if (posty == (movies.length / 3).ceil() - 3) {
+                    if (posty == (movies.length / 8).ceil() - 8) {
                       _loadMore();
                     }
                   }
@@ -335,7 +335,7 @@ class _MoviesState extends ResumableState<Movies> {
                       postx--;
                       _scrollToIndexXY(postx, posty);
                     }
-                    _focused_poster = ((posty * 3) + postx);
+                    _focused_poster = ((posty * 8) + postx);
                   }
                   break;
                 case KEY_RIGHT:
@@ -368,7 +368,7 @@ class _MoviesState extends ResumableState<Movies> {
                         postx++;
                         _scrollToIndexXY(postx, posty);
                       }
-                      _focused_poster = ((posty * 3) + postx);
+                      _focused_poster = ((posty * 8) + postx);
 
                       break;
                   }
@@ -395,7 +395,7 @@ class _MoviesState extends ResumableState<Movies> {
                     right: 0,
                     top: Responsive.isMobile(context)
                         ? MediaQuery.of(context).size.height / 7.0
-                        : 0,
+                        : 0.0,
                     // top: MediaQuery.of(context).size.height / 7.9,
                     // top: 0,
                     // left: Responsive.isMobile(context)
@@ -404,10 +404,10 @@ class _MoviesState extends ResumableState<Movies> {
                     // bottom: Responsive.isMobile(context)
                     //     ? MediaQuery.of(context).size.height / 4
                     //     : MediaQuery.of(context).size.height / 4,
-                    left: MediaQuery.of(context).size.width / 50.sw,
+                    // left: MediaQuery.of(context).size.width / 50.sw,
                     bottom: Responsive.isMobile(context)
                         ? MediaQuery.of(context).size.height / 2.15
-                        : MediaQuery.of(context).size.height,
+                        : MediaQuery.of(context).size.height / 2.15,
                     // bottom: MediaQuery.of(context).size.height /  ,
                     child: CachedNetworkImage(
                         imageUrl: movies[_focused_poster].cover,
@@ -415,8 +415,8 @@ class _MoviesState extends ResumableState<Movies> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         fadeInDuration: Duration(seconds: 1))
-                    //child: FadeInImage(placeholder: MemoryImage(kTransparentImage),image:(movies.length > 0)? CachedNetworkImageProvider(movies[_focused_poster].cover):CachedNetworkImageProvider(""),fit: BoxFit.cover)
-                    ),
+                  //child: FadeInImage(placeholder: MemoryImage(kTransparentImage),image:(movies.length > 0)? CachedNetworkImageProvider(movies[_focused_poster].cover):CachedNetworkImageProvider(""),fit: BoxFit.cover)
+                ),
               Positioned(
                 left: 0,
                 right: 0,
@@ -425,16 +425,16 @@ class _MoviesState extends ResumableState<Movies> {
                 child: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Colors.black,
-                    Colors.black,
-                    Colors.black54,
-                    Colors.black54,
-                    Colors.black54
-                  ],
-                ))),
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Colors.black,
+                            Colors.black,
+                            Colors.black54,
+                            Colors.black54,
+                            Colors.black54
+                          ],
+                        ))),
               ),
               Positioned(
                 left: 0,
@@ -442,30 +442,30 @@ class _MoviesState extends ResumableState<Movies> {
                 bottom: 0,
                 child: Container(
                     height: MediaQuery.of(context).size.height -
-                        (MediaQuery.of(context).size.height / 3),
+                        (MediaQuery.of(context).size.height / 8),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.black,
-                        Colors.black,
-                        Colors.transparent,
-                        Colors.transparent
-                      ],
-                    ))),
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black,
+                            Colors.black,
+                            Colors.transparent,
+                            Colors.transparent
+                          ],
+                        ))),
               ),
               NavigationWidget(
                   postx: postx,
                   posty: posty,
-                  selectedItem: 3,
+                  selectedItem: 8,
                   image: image,
                   logged: logged),
               if (_visibile_loading) MovieLoadingWidget(),
               if (_visibile_error) _tryAgainWidget(),
               if (movies.length > 0 && !_visibile_loading && !_visibile_error)
                 AnimatedPositioned(
-                    // top: (posty < 0) ? 70 : 40,
+                  // top: (posty < 0) ? 70 : 40,
                     top: (posty < 0) ? 80 : 40,
                     left: 0,
                     right: 0,
@@ -519,8 +519,8 @@ class _MoviesState extends ResumableState<Movies> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal:
-                                        Responsive.isMobile(context) ? 1 : 10),
-                                        // Responsive.isMobile(context) ? 5 : 10),
+                                    Responsive.isMobile(context) ? 1 : 10),
+                                // Responsive.isMobile(context) ? 5 : 10),
                                 margin: EdgeInsets.symmetric(vertical: 7),
                                 height: 40,
                                 child: GestureDetector(
@@ -529,9 +529,9 @@ class _MoviesState extends ResumableState<Movies> {
                                       posty = -1;
                                       postx = 0;
                                       Future.delayed(Duration(milliseconds: 50),
-                                          () {
-                                        _showGenresDialog();
-                                      });
+                                              () {
+                                            _showGenresDialog();
+                                          });
                                     });
                                   },
                                   child: Row(
@@ -552,7 +552,7 @@ class _MoviesState extends ResumableState<Movies> {
                                             ? Colors.black
                                             : Colors.white70,
                                         size: Responsive.isMobile(context)
-                                            // ? 20
+                                        // ? 20
                                             ? 16
                                             : 30,
                                       ),
@@ -597,13 +597,13 @@ class _MoviesState extends ResumableState<Movies> {
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      // ? 0
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                              // ? 0
+                                                  ? 1
+                                                  : 12),
                                           height: 40,
                                           color: ((posty == -1 && postx == 1) ||
-                                                  selected_sort == 1)
+                                              selected_sort == 1)
                                               ? Colors.white
                                               : Colors.transparent,
                                           child: Row(
@@ -611,8 +611,8 @@ class _MoviesState extends ResumableState<Movies> {
                                               Icon(
                                                 Icons.access_time,
                                                 color: ((posty == -1 &&
-                                                            postx == 1) ||
-                                                        selected_sort == 1)
+                                                    postx == 1) ||
+                                                    selected_sort == 1)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -624,13 +624,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Newest",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 1) ||
-                                                            selected_sort == 1)
+                                                        postx == 1) ||
+                                                        selected_sort == 1)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -650,17 +650,17 @@ class _MoviesState extends ResumableState<Movies> {
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                                  ? 1
+                                                  : 12),
                                           height: 40,
                                           child: Row(
                                             children: [
                                               Icon(
                                                 Icons.remove_red_eye,
                                                 color: ((posty == -1 &&
-                                                            postx == 2) ||
-                                                        selected_sort == 2)
+                                                    postx == 2) ||
+                                                    selected_sort == 2)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -670,13 +670,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Views",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 2) ||
-                                                            selected_sort == 2)
+                                                        postx == 2) ||
+                                                        selected_sort == 2)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -686,10 +686,10 @@ class _MoviesState extends ResumableState<Movies> {
                                                     color: Colors.white,
                                                     width: 1)),
                                             color:
-                                                ((posty == -1 && postx == 2) ||
-                                                        selected_sort == 2)
-                                                    ? Colors.white
-                                                    : Colors.transparent,
+                                            ((posty == -1 && postx == 2) ||
+                                                selected_sort == 2)
+                                                ? Colors.white
+                                                : Colors.transparent,
                                           ),
                                         ),
                                       ),
@@ -708,16 +708,16 @@ class _MoviesState extends ResumableState<Movies> {
                                           height: 40,
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                                  ? 1
+                                                  : 12),
                                           child: Row(
                                             children: [
                                               Icon(
                                                 Icons.star_half,
                                                 color: ((posty == -1 &&
-                                                            postx == 3) ||
-                                                        selected_sort == 3)
+                                                    postx == 3) ||
+                                                    selected_sort == 3)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -727,13 +727,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Rating",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 3) ||
-                                                            selected_sort == 3)
+                                                        postx == 3) ||
+                                                        selected_sort == 3)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -743,10 +743,10 @@ class _MoviesState extends ResumableState<Movies> {
                                                     color: Colors.white,
                                                     width: 1)),
                                             color:
-                                                ((posty == -1 && postx == 3) ||
-                                                        selected_sort == 3)
-                                                    ? Colors.white
-                                                    : Colors.transparent,
+                                            ((posty == -1 && postx == 3) ||
+                                                selected_sort == 3)
+                                                ? Colors.white
+                                                : Colors.transparent,
                                           ),
                                         ),
                                       ),
@@ -765,16 +765,16 @@ class _MoviesState extends ResumableState<Movies> {
                                           height: 40,
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                                  ? 1
+                                                  : 12),
                                           child: Row(
                                             children: [
                                               Icon(
                                                 FontAwesomeIcons.imdb,
                                                 color: ((posty == -1 &&
-                                                            postx == 4) ||
-                                                        selected_sort == 4)
+                                                    postx == 4) ||
+                                                    selected_sort == 4)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -784,13 +784,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Imdb",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 4) ||
-                                                            selected_sort == 4)
+                                                        postx == 4) ||
+                                                        selected_sort == 4)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -800,10 +800,10 @@ class _MoviesState extends ResumableState<Movies> {
                                                     color: Colors.white,
                                                     width: 1)),
                                             color:
-                                                ((posty == -1 && postx == 4) ||
-                                                        selected_sort == 4)
-                                                    ? Colors.white
-                                                    : Colors.transparent,
+                                            ((posty == -1 && postx == 4) ||
+                                                selected_sort == 4)
+                                                ? Colors.white
+                                                : Colors.transparent,
                                           ),
                                         ),
                                       ),
@@ -822,16 +822,16 @@ class _MoviesState extends ResumableState<Movies> {
                                           height: 40,
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                                  ? 1
+                                                  : 12),
                                           child: Row(
                                             children: [
                                               Icon(
                                                 Icons.text_fields,
                                                 color: ((posty == -1 &&
-                                                            postx == 5) ||
-                                                        selected_sort == 5)
+                                                    postx == 5) ||
+                                                    selected_sort == 5)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -841,13 +841,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Title",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 5) ||
-                                                            selected_sort == 5)
+                                                        postx == 5) ||
+                                                        selected_sort == 5)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -857,10 +857,10 @@ class _MoviesState extends ResumableState<Movies> {
                                                     color: Colors.white,
                                                     width: 1)),
                                             color:
-                                                ((posty == -1 && postx == 5) ||
-                                                        selected_sort == 5)
-                                                    ? Colors.white
-                                                    : Colors.transparent,
+                                            ((posty == -1 && postx == 5) ||
+                                                selected_sort == 5)
+                                                ? Colors.white
+                                                : Colors.transparent,
                                           ),
                                         ),
                                       ),
@@ -879,16 +879,16 @@ class _MoviesState extends ResumableState<Movies> {
                                           height: 40,
                                           padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  Responsive.isMobile(context)
-                                                      ? 1
-                                                      : 12),
+                                              Responsive.isMobile(context)
+                                                  ? 1
+                                                  : 12),
                                           child: Row(
                                             children: [
                                               Icon(
                                                 Icons.date_range,
                                                 color: ((posty == -1 &&
-                                                            postx == 6) ||
-                                                        selected_sort == 6)
+                                                    postx == 6) ||
+                                                    selected_sort == 6)
                                                     ? Colors.black
                                                     : Colors.white,
                                                 size: 16,
@@ -898,13 +898,13 @@ class _MoviesState extends ResumableState<Movies> {
                                                 "Year",
                                                 style: TextStyle(
                                                     color: ((posty == -1 &&
-                                                                postx == 6) ||
-                                                            selected_sort == 6)
+                                                        postx == 6) ||
+                                                        selected_sort == 6)
                                                         ? Colors.black
                                                         : Colors.white,
                                                     fontSize: 11.sp,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ],
                                           ),
@@ -914,10 +914,10 @@ class _MoviesState extends ResumableState<Movies> {
                                                     color: Colors.white,
                                                     width: 1)),
                                             color:
-                                                ((posty == -1 && postx == 6) ||
-                                                        selected_sort == 6)
-                                                    ? Colors.white
-                                                    : Colors.transparent,
+                                            ((posty == -1 && postx == 6) ||
+                                                selected_sort == 6)
+                                                ? Colors.white
+                                                : Colors.transparent,
                                           ),
                                         ),
                                       )
@@ -936,13 +936,13 @@ class _MoviesState extends ResumableState<Movies> {
                             behavior: MyBehavior(),
                             // From this behaviour you can change the behaviour
                             child: ScrollablePositionedList.builder(
-                              itemCount: (movies.length / 3).ceil(),
+                              itemCount: (movies.length / 8).ceil(),
                               scrollDirection: Axis.vertical,
                               itemScrollController: _scrollController,
                               itemBuilder: (context, jndex) {
-                                int items_line_count = (movies.length - ((jndex + 1) * 3) > 0)
-                                        ? 3
-                                        : (movies.length - (jndex * 3)).abs();
+                                int items_line_count = (movies.length - ((jndex + 1) * 8) > 0)
+                                    ? 8
+                                    : (movies.length - (jndex * 8)).abs();
                                 return _moviesLineGridWidget(
                                     jndex, items_line_count);
                               },
@@ -1165,7 +1165,7 @@ class _MoviesState extends ResumableState<Movies> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  Movie(movie: movies[(jndex * 3) + index]),
+                                  Movie(movie: movies[(jndex * 8) + index]),
                               transitionDuration: Duration(seconds: 0),
                             ),
                           );
@@ -1174,7 +1174,7 @@ class _MoviesState extends ResumableState<Movies> {
                     },
                     child: MovieWidget(
                         isFocus: ((posty == jndex && postx == index)),
-                        movie: movies[(jndex * 3) + index]));
+                        movie: movies[(jndex * 8) + index]));
               },
             ),
           )

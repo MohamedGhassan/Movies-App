@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_tv/key_code.dart';
@@ -7,26 +6,31 @@ import 'package:flutter_app_tv/ui/auth/edit.dart';
 import 'package:flutter_app_tv/ui/auth/password.dart';
 import 'package:flutter_app_tv/ui/auth/profile_item_widget.dart';
 import 'package:flutter_app_tv/ui/auth/subscriptions.dart';
+
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../responsive.dart';
+
 String name = "";
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends ResumableState<Profile> {
-
   bool infos = false;
   bool? logged;
   bool? subscribe;
+
   // String name = "";
   String type = "";
-  Image image = Image.asset("assets/images/profile.jpg");
+
+  // Image image = Image.asset("assets/images/profile.jpg");
+  Image image = Image.asset("assets/images/my_image.jpg");
 
   String email = "";
 
@@ -49,15 +53,13 @@ class _ProfileState extends ResumableState<Profile> {
     // TODO: implement onResume
     super.onResume();
     getLogged();
-
-
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
-        if(infos){
+      onWillPop: () async {
+        if (infos) {
           setState(() {
             infos = false;
           });
@@ -68,14 +70,15 @@ class _ProfileState extends ResumableState<Profile> {
       child: RawKeyboardListener(
         focusNode: main_focus_node,
         onKey: (RawKeyEvent event) {
-          if (event is RawKeyDownEvent && event.data is RawKeyEventDataAndroid) {
+          if (event is RawKeyDownEvent &&
+              event.data is RawKeyEventDataAndroid) {
             RawKeyDownEvent rawKeyDownEvent = event;
-            RawKeyEventDataAndroid rawKeyEventDataAndroid =rawKeyDownEvent.data as RawKeyEventDataAndroid;
+            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+            rawKeyDownEvent.data as RawKeyEventDataAndroid;
             print("Focus Node 0 ${rawKeyEventDataAndroid.keyCode}");
             switch (rawKeyEventDataAndroid.keyCode) {
               case KEY_CENTER:
-                if(infos)
-                  break;
+                if (infos) break;
                 _showInfos();
                 _logout();
                 _goToChangePassword();
@@ -83,34 +86,34 @@ class _ProfileState extends ResumableState<Profile> {
                 _goToSubscriptions();
                 break;
               case KEY_UP:
-                if(infos)
-                  break;
-                if(pos_y > 0) {
-                  pos_y --;
+                if (infos) break;
+                if (pos_y > 0) {
+                  pos_y--;
                 }
                 break;
               case KEY_DOWN:
-                if(infos)
-                  break;
-                if(pos_y < 4) {
-                  pos_y ++;
+                if (infos) break;
+                if (pos_y < 4) {
+                  pos_y++;
                 }
                 break;
 
               default:
                 break;
             }
-            setState(() {
-
-            });
+            setState(() {});
           }
         },
         child: Scaffold(
-            backgroundColor:  Theme.of(context).scaffoldBackgroundColor,
-            body:Stack(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: Stack(
               children: [
-                FadeInImage(placeholder: MemoryImage(kTransparentImage),image:AssetImage("assets/images/background.jpeg"),fit: BoxFit.cover),
-                ClipRRect( // Clip it cleanly.
+                FadeInImage(
+                    placeholder: MemoryImage(kTransparentImage),
+                    image: AssetImage("assets/images/background.jpeg"),
+                    fit: BoxFit.cover),
+                ClipRRect(
+                  // Clip it cleanly.
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: Container(
@@ -119,170 +122,242 @@ class _ProfileState extends ResumableState<Profile> {
                     ),
                   ),
                 ),
-                if(logged == true)
-                Positioned(
-                  right: 0,
-                  bottom: -5,
-                  top: -5,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      boxShadow: [
-                        BoxShadow(
-                            color:Colors.black,
-                            offset: Offset(0,0),
-                            blurRadius: 5
-                        ),
-                      ],
-                    ),
-                    width: Responsive.isMobile(context)
-                        ? MediaQuery.of(context).size.width/1.5
-                        : MediaQuery.of(context).size.width/2.5,
+                if (logged == true)
+                  Positioned(
+                    right: 0,
+                    bottom: -5,
+                    top: -5,
                     child: Container(
-                      width: double.infinity,
-                      color: Colors.black54,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black87,
-
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 80.0,left: 10,bottom: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
+                      decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(0, 0),
+                              blurRadius: 5),
+                        ],
+                      ),
+                      width: Responsive.isMobile(context)
+                          ? MediaQuery.of(context).size.width / 1.5
+                          : MediaQuery.of(context).size.width / 2.5,
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.black54,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black87,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    top: Responsive.isMobile(context) ? 80 : 30,
+                                    // top: 80.0,
+                                    left: 10, bottom: 10),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
                                               color:Colors.white.withOpacity(0.4),
                                               offset: Offset(0,0),
                                               blurRadius: 5
+                                          ),],),
+
+                                      // height: 50,
+                                      height: Responsive.isMobile(context)
+                                          ? 50
+                                          : 80,
+                                      child: Image(
+                                        image: AssetImage(
+                                            'assets/images/myimage.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // Container(
+                                    //   decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(5),
+                                    //       boxShadow: [
+                                    //         BoxShadow(
+                                    //             color:Colors.white.withOpacity(0.4),
+                                    //             offset: Offset(0,0),
+                                    //             blurRadius: 5
+                                    //         ),
+                                    //       ],
+                                    //   ),
+                                    //   height: 50,
+                                    //   child: image,
+                                    //   // child: ClipRRect(
+                                    //   //   child: image,
+                                    //   //   borderRadius:  BorderRadius.circular(5)
+                                    //   // ),
+                                    // ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      name,
+                                      style: TextStyle(
+                                        // fontSize: 18,
+                                          fontSize: Responsive.isMobile(context)
+                                              ? 18
+                                              : 22,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                color: Colors.black.withOpacity(0.6),
+                                child: Stack(
+                                  children: [
+                                    Visibility(
+                                      visible: !infos,
+                                      child: Column(
+                                        children: [
+                                          ProfileItemWidget(
+                                              icon: Icons.person,
+                                              title: "My Profile",
+                                              isFocused: (pos_y == 0),
+                                              subtitle:
+                                              "My profile informations",
+                                              action: () {
+                                                setState(() {
+                                                  pos_y = 0;
+                                                  _showInfos();
+                                                });
+                                              }),
+                                          ProfileItemWidget(
+                                              icon: Icons.edit,
+                                              title: "Edit Profile",
+                                              isFocused: (pos_y == 1),
+                                              subtitle:
+                                              "Edit profile informations",
+                                              action: () {
+                                                setState(() {
+                                                  pos_y = 1;
+                                                  _goToEditProfile();
+                                                });
+                                              }),
+                                          ProfileItemWidget(
+                                              icon: Icons.star,
+                                              title: "Subscriptions",
+                                              isFocused: (pos_y == 2),
+                                              subtitle:
+                                              "My subscriptions history",
+                                              action: () {
+                                                setState(() {
+                                                  pos_y = 2;
+                                                  _goToSubscriptions();
+                                                });
+                                              }),
+                                          ProfileItemWidget(
+                                              icon: Icons.lock,
+                                              title: "Change password",
+                                              isFocused: (pos_y == 3),
+                                              subtitle: "Change my password",
+                                              action: () {
+                                                setState(() {
+                                                  pos_y = 3;
+                                                  _goToChangePassword();
+                                                });
+                                              }),
+                                          ProfileItemWidget(
+                                              icon: Icons.logout,
+                                              title: "Logout",
+                                              isFocused: (pos_y == 4),
+                                              subtitle:
+                                              "Logout me from this device",
+                                              action: () {
+                                                setState(() {
+                                                  pos_y = 4;
+                                                  _logout();
+                                                });
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible: infos,
+                                      child: Column(
+                                        children: [
+                                          ProfileItemWidget(
+                                            icon: Icons.person,
+                                            title: "Name",
+                                            isFocused: false,
+                                            subtitle: name,
+                                            action: () {},
+                                          ),
+                                          ProfileItemWidget(
+                                            icon: Icons.mail,
+                                            title: "Email / Id (" + type + ")",
+                                            isFocused: false,
+                                            subtitle: email,
+                                            action: () {},
+                                          ),
+                                          ProfileItemWidget(
+                                            icon: (subscribe!)
+                                                ? Icons.star
+                                                : Icons.star_border,
+                                            title: "Subscriptions",
+                                            isFocused: false,
+                                            subtitle: (subscribe!)
+                                                ? " You are premium now"
+                                                : "you are not subscribed yet !",
+                                            action: () {},
                                           ),
                                         ],
-                                    ),
-                                    height: 50,
-                                    child: ClipRRect(
-                                      child: image,
-                                      borderRadius:  BorderRadius.circular(5)
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                      name.toUpperCase(),
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900
                                       ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child:Container(
-                              color: Colors.black.withOpacity(0.6),
-                              child:  Stack(
-                                children: [
-                                  Visibility(
-                                    visible: !infos,
-                                    child: Column(
-                                      children: [
-                                        ProfileItemWidget(icon: Icons.person,title: "My Profile",isFocused: (pos_y == 0),subtitle: "My profile informations",action: (){
-                                            setState(() {
-                                              pos_y =0;
-                                              _showInfos();
-                                            });
-                                        }),
-                                        ProfileItemWidget(icon: Icons.edit,title: "Edit Profile",isFocused: (pos_y == 1),subtitle: "Edit profile informations",action: (){
-                                          setState(() {
-                                            pos_y =1;
-                                            _goToEditProfile();
-                                          });
-                                        }),
-                                        ProfileItemWidget(icon: Icons.star,title: "Subscriptions",isFocused: (pos_y == 2),subtitle: "My subscriptions history",action:(){
-                                          setState(() {
-                                            pos_y =2;
-                                            _goToSubscriptions();
-                                          });
-                                        }),
-                                        ProfileItemWidget(icon: Icons.lock,title: "Change password",isFocused: (pos_y == 3),subtitle: "Change my password",action: (){
-                                          setState(() {
-                                            pos_y =3;
-                                            _goToChangePassword();
-                                          });
-                                        }),
-                                        ProfileItemWidget(icon: Icons.logout,title: "Logout",isFocused: (pos_y == 4),subtitle: "Logout me from this device",action:(){
-                                          setState(() {
-                                            pos_y =4;
-                                            _logout();
-                                          });
-                                        }),
-
-                                      ],
                                     ),
-                                  ),
-                                  Visibility(
-                                    visible: infos,
-                                    child: Column(
-                                      children: [
-                                        ProfileItemWidget(icon: Icons.person,title: "Name",isFocused: false,subtitle: name, action: () {  },),
-                                        ProfileItemWidget(icon: Icons.mail,title: "Email / Id ("+ type +")",isFocused: false,subtitle: email, action: () {  },),
-                                        ProfileItemWidget(icon: (subscribe!)? Icons.star: Icons.star_border,title: "Subscriptions",isFocused: false,subtitle: (subscribe!)?" You are premium now":"you are not subscribed yet !", action: () {  },),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
-            )
-        ),
+            )),
       ),
     );
   }
 
-   getLogged() async {
+  getLogged() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    logged =  prefs.getBool("LOGGED_USER");
+    logged = prefs.getBool("LOGGED_USER");
 
-    if(logged == true) {
+    if (logged == true) {
       String? img = prefs.getString("IMAGE_USER");
-      image = Image.network( img!);
-      name =  prefs.getString("NAME_USER")!;
-      email =  prefs.getString("USERNAME_USER")!;
-      type =  prefs.getString("TYPE_USER")!;
-      subscribe =  (prefs.getString("NEW_SUBSCRIBE_ENABLED") ==  "FALSE")? false:true;
-      setState(() {
-
-      });
-    }else{
+      image = Image.network(img!);
+      name = prefs.getString("NAME_USER")!;
+      email = prefs.getString("USERNAME_USER")!;
+      type = prefs.getString("TYPE_USER")!;
+      subscribe =
+      (prefs.getString("NEW_SUBSCRIBE_ENABLED") == "FALSE") ? false : true;
+      setState(() {});
+    } else {
       logged = false;
       image = Image.asset("assets/images/profile.jpg");
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
-  void  _logout(){
-    if(pos_y == 4){
+
+  void _logout() {
+    if (pos_y == 4) {
       logout();
     }
   }
+
   logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -306,16 +381,17 @@ class _ProfileState extends ResumableState<Profile> {
     // );
     Navigator.pop(context);
   }
+
   void _showInfos() {
-    if(pos_y == 0){
+    if (pos_y == 0) {
       setState(() {
-        infos=true;
+        infos = true;
       });
     }
   }
 
   void _goToChangePassword() {
-    if(pos_y == 3){
+    if (pos_y == 3) {
       push(
         context,
         PageRouteBuilder(
@@ -325,8 +401,9 @@ class _ProfileState extends ResumableState<Profile> {
       );
     }
   }
+
   void _goToSubscriptions() {
-    if(pos_y == 2){
+    if (pos_y == 2) {
       push(
         context,
         PageRouteBuilder(
@@ -336,8 +413,9 @@ class _ProfileState extends ResumableState<Profile> {
       );
     }
   }
+
   void _goToEditProfile() {
-    if(pos_y == 1){
+    if (pos_y == 1) {
       push(
         context,
         PageRouteBuilder(
@@ -347,5 +425,4 @@ class _ProfileState extends ResumableState<Profile> {
       );
     }
   }
-
 }

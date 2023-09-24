@@ -232,383 +232,387 @@ class _RegisterState extends State<Register> {
               bottom: -5,
               top: -5,
               child: Container(
+
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   boxShadow: [
                     BoxShadow(
-                        color:Colors.black,
+                        // color:Colors.black,
                         offset: Offset(0,0),
                         blurRadius: 5
                     ),
                   ],
                 ),
                 width: MediaQuery.of(context).size.width/1.3,
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(50),
-                  color: Colors.black54,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(50),
+                    color: Colors.black54,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                      Text(
-                        "Sign up for free !",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w900
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: usernameController,
-                        focusNode: username_focus_node,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          focusColor: (emailvalide)?Colors.white:Colors.red,
-                          labelText: 'E-mail',
-                          labelStyle: TextStyle(
-                              color: (emailvalide)?Colors.white:Colors.red
-                          ),
-                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (emailvalide)?Colors.white:Colors.red,width: 1)),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (emailvalide)?Colors.white54:Colors.red,width: 1)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color:(emailvalide)?Colors.white:Colors.red,width: 1)),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                          isDense: true,
-
-                          suffixIcon: Icon(
-                            Icons.mail,
-                            size: 15,
-                            color: (emailvalide)?Colors.white70:Colors.red,
+                        Text(
+                          "Sign up for free !",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900
                           ),
                         ),
-                        style: TextStyle(
-                          color: (emailvalide)?Colors.white:Colors.red,
-
-                        ),
-                        maxLines: 1,
-                        minLines: 1,
-                        scrollPadding: EdgeInsets.zero,
-                        cursorColor: Colors.white,
-                        onFieldSubmitted: (v){
-                          FocusScope.of(context).requestFocus(name_focus_node);
-                          if(checkEmail(usernameController.text)){
-                            emailvalide = true;
-                          }else{
-                            emailvalide = false;
-                          }
-                          setState(() {
-
-                          });
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: nameController,
-                        focusNode: name_focus_node,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
-                          focusColor: (namevalide)?Colors.white:Colors.red,
-                          labelText: 'Full name',
-                          labelStyle: TextStyle(
-                              color: (namevalide)?Colors.white:Colors.red
-                          ),
-                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white:Colors.red,width: 1)),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white54:Colors.red,width: 1)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white:Colors.red,width: 1)),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
-                          suffixIcon: Icon(
-                            Icons.text_fields,
-                            size: 15,
-                            color: (namevalide)?Colors.white70:Colors.red,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: (namevalide)?Colors.white:Colors.red,
-                        ),
-                        maxLines: 1,
-                        minLines: 1,
-                        scrollPadding: EdgeInsets.zero,
-                        cursorColor: Colors.white,
-                        onFieldSubmitted: (v){
-                          if(nameController.text.length>=3){
-                            namevalide = true;
-                          }else{
-                            namevalide = false;
-                          }
-                          setState(() {
-
-                          });
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: passwordController,
-
-                        focusNode: password_focus_node,
-                        obscureText:true,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.visiblePassword,
-                        decoration: InputDecoration(
-                          focusColor: (!passwordvalide)?Colors.red:Colors.white,
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                              color: (!passwordvalide)?Colors.red:Colors.white
-                          ),
-                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white,width: 1)),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white54,width: 1)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white,width: 1)),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
-                          suffixIcon: Icon(
-                            Icons.vpn_key_rounded,
-                            size: 15,
-                            color: (!passwordvalide)?Colors.red:Colors.white70,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: (!passwordvalide)?Colors.red:Colors.white,
-                        ),
-                        maxLines: 1,
-                        minLines: 1,
-                        scrollPadding: EdgeInsets.zero,
-                        cursorColor: Colors.white,
-                        onFieldSubmitted: (v){
-                          FocusScope.of(context).requestFocus(confirm_password_focus_node);
-                          if(passwordController.text.length>=6){
-                            passwordvalide = true;
-                          }else{
-                            passwordvalide = false;
-
-                          }
-                          setState(() {
-
-                          });
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: confirmpasswordController,
-
-                        focusNode: confirm_password_focus_node,
-                        obscureText:true,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.visiblePassword,
-                        decoration: InputDecoration(
-                          focusColor: (!confirmpasswordvalide)?Colors.red:Colors.white,
-                          labelText: 'Password confirmation',
-                          labelStyle: TextStyle(
-                              color: (!confirmpasswordvalide)?Colors.red:Colors.white
-                          ),
-                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white,width: 1)),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white54,width: 1)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white,width: 1)),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
-                          suffixIcon: Icon(
-                            Icons.vpn_key_rounded,
-                            size: 15,
-                            color: (!confirmpasswordvalide)?Colors.red:Colors.white70,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: (!confirmpasswordvalide)?Colors.red:Colors.white,
-                        ),
-                        maxLines: 1,
-                        minLines: 1,
-                        scrollPadding: EdgeInsets.zero,
-                        cursorColor: Colors.white,
-                        onFieldSubmitted: (v){
-                          if(confirmpasswordController.text ==  passwordController.text){
-                            confirmpasswordvalide = true;
-                          }else{
-                            confirmpasswordvalide = false;
-                          }
-                          FocusScope.of(context).requestFocus(main_focus_node);
-                          pos_y= 1;
-                          setState(() {
-
-                          });
-                        },
-                      ),
-
-                      Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 40,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: GestureDetector(
-                            onTap: (){
-                             setState(() {
-                               pos_y = 1;
-                               privacy = !privacy;
-                             });
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-
-                                    height:40,
-                                    decoration: BoxDecoration(
-                                    ),
-                                    child: Center(
-                                      child: Container(
-                                        height:25,
-                                        width: 25,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            border: Border.all(color: (!accept)?Colors.red: (pos_y == 1)? Colors.white : Colors.white38,width: 2)
-                                        ),
-                                        child: Icon( FontAwesomeIcons.check ,color:   (pos_y == 1)? (privacy)? Colors.white :Colors.transparent: (privacy)? Colors.white38 :Colors.transparent, size: 15,),
-                                      ),
-                                    )
-                                ),
-                                SizedBox(width: 10),
-                                Center(
-                                  child: Text(
-                                    "I agree to the privacy policy",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color:(!accept)?Colors.red: (pos_y == 1)? Colors.white :(pos_y == 1)? Colors.white : Colors.white38,
-                                    ),
-                                  ),
-                                )
-                              ],
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: usernameController,
+                          focusNode: username_focus_node,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            focusColor: (emailvalide)?Colors.white:Colors.red,
+                            labelText: 'E-mail',
+                            labelStyle: TextStyle(
+                                color: (emailvalide)?Colors.white:Colors.red
                             ),
-                          )
-                      ),
-                      if(_visibile_error)
-                        Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red,width: 0.3),
-                            borderRadius: BorderRadius.circular(5),
-                            color:  Colors.redAccent,
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (emailvalide)?Colors.white:Colors.red,width: 1)),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (emailvalide)?Colors.white54:Colors.red,width: 1)),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color:(emailvalide)?Colors.white:Colors.red,width: 1)),
+                            contentPadding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                            isDense: true,
+
+                            suffixIcon: Icon(
+                              Icons.mail,
+                              size: 15,
+                              color: (emailvalide)?Colors.white70:Colors.red,
+                            ),
                           ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(5.0),
-                                height: 28,
-                                width: 28,
-                                child: Icon(
-                                  Icons.warning,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      _message_error ,
-                                      style: TextStyle(
-                                        color:Colors.white,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w500,
-                                      )
-                                  ),
-                                ),
-                              ),
-                            ],
+                          style: TextStyle(
+                            color: (emailvalide)?Colors.white:Colors.red,
+
                           ),
+                          maxLines: 1,
+                          minLines: 1,
+                          scrollPadding: EdgeInsets.zero,
+                          cursorColor: Colors.white,
+                          onFieldSubmitted: (v){
+                            FocusScope.of(context).requestFocus(name_focus_node);
+                            if(checkEmail(usernameController.text)){
+                              emailvalide = true;
+                            }else{
+                              emailvalide = false;
+                            }
+                            setState(() {
+
+                            });
+                          },
                         ),
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            pos_y=2;
-                            _goToValidate();
-                          });
-                        },
-                        child: Container(
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: nameController,
+                          focusNode: name_focus_node,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            focusColor: (namevalide)?Colors.white:Colors.red,
+                            labelText: 'Full name',
+                            labelStyle: TextStyle(
+                                color: (namevalide)?Colors.white:Colors.red
+                            ),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white:Colors.red,width: 1)),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white54:Colors.red,width: 1)),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (namevalide)?Colors.white:Colors.red,width: 1)),
+                            contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
+                            suffixIcon: Icon(
+                              Icons.text_fields,
+                              size: 15,
+                              color: (namevalide)?Colors.white70:Colors.red,
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: (namevalide)?Colors.white:Colors.red,
+                          ),
+                          maxLines: 1,
+                          minLines: 1,
+                          scrollPadding: EdgeInsets.zero,
+                          cursorColor: Colors.white,
+                          onFieldSubmitted: (v){
+                            if(nameController.text.length>=3){
+                              namevalide = true;
+                            }else{
+                              namevalide = false;
+                            }
+                            setState(() {
+
+                            });
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: passwordController,
+
+                          focusNode: password_focus_node,
+                          obscureText:true,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            focusColor: (!passwordvalide)?Colors.red:Colors.white,
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                color: (!passwordvalide)?Colors.red:Colors.white
+                            ),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white,width: 1)),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white54,width: 1)),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!passwordvalide)?Colors.red:Colors.white,width: 1)),
+                            contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
+                            suffixIcon: Icon(
+                              Icons.vpn_key_rounded,
+                              size: 15,
+                              color: (!passwordvalide)?Colors.red:Colors.white70,
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: (!passwordvalide)?Colors.red:Colors.white,
+                          ),
+                          maxLines: 1,
+                          minLines: 1,
+                          scrollPadding: EdgeInsets.zero,
+                          cursorColor: Colors.white,
+                          onFieldSubmitted: (v){
+                            FocusScope.of(context).requestFocus(confirm_password_focus_node);
+                            if(passwordController.text.length>=6){
+                              passwordvalide = true;
+                            }else{
+                              passwordvalide = false;
+
+                            }
+                            setState(() {
+
+                            });
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: confirmpasswordController,
+
+                          focusNode: confirm_password_focus_node,
+                          obscureText:true,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            focusColor: (!confirmpasswordvalide)?Colors.red:Colors.white,
+                            labelText: 'Password confirmation',
+                            labelStyle: TextStyle(
+                                color: (!confirmpasswordvalide)?Colors.red:Colors.white
+                            ),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white,width: 1)),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white54,width: 1)),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0),borderSide: BorderSide(color: (!confirmpasswordvalide)?Colors.red:Colors.white,width: 1)),
+                            contentPadding: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
+                            suffixIcon: Icon(
+                              Icons.vpn_key_rounded,
+                              size: 15,
+                              color: (!confirmpasswordvalide)?Colors.red:Colors.white70,
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: (!confirmpasswordvalide)?Colors.red:Colors.white,
+                          ),
+                          maxLines: 1,
+                          minLines: 1,
+                          scrollPadding: EdgeInsets.zero,
+                          cursorColor: Colors.white,
+                          onFieldSubmitted: (v){
+                            if(confirmpasswordController.text ==  passwordController.text){
+                              confirmpasswordvalide = true;
+                            }else{
+                              confirmpasswordvalide = false;
+                            }
+                            FocusScope.of(context).requestFocus(main_focus_node);
+                            pos_y= 1;
+                            setState(() {
+
+                            });
+                          },
+                        ),
+
+                        Container(
                             margin: EdgeInsets.only(top: 10),
-                            height: 45,
+                            height: 40,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              border:Border.all(color: (pos_y == 2)? Colors.white:Colors.deepOrangeAccent,width: 2),
-                              color:Colors.deepOrangeAccent,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                (loading)?
-                                Container(
-                                    height:40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white10,
-                                        borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(4),topLeft: Radius.circular(4))
-                                    ),
-                                    child: Center(
-                                      child: Container(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2,
-                                          )
+                            child: GestureDetector(
+                              onTap: (){
+                               setState(() {
+                                 pos_y = 1;
+                                 privacy = !privacy;
+                               });
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+
+                                      height:40,
+                                      decoration: BoxDecoration(
                                       ),
-                                    )
-                                )
-                                    :
-                                Container(
-                                    height:40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white10,
-                                        borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(5),topLeft: Radius.circular(5))
-                                    ),
-                                    child: Icon( FontAwesomeIcons.signInAlt ,color:   Colors.white,)
-                                ),
-                                Expanded(
-                                  child: Center(
+                                      child: Center(
+                                        child: Container(
+                                          height:25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              border: Border.all(color: (!accept)?Colors.red: (pos_y == 1)? Colors.white : Colors.white38,width: 2)
+                                          ),
+                                          child: Icon( FontAwesomeIcons.check ,color:   (pos_y == 1)? (privacy)? Colors.white :Colors.transparent: (privacy)? Colors.white38 :Colors.transparent, size: 15,),
+                                        ),
+                                      )
+                                  ),
+                                  SizedBox(width: 10),
+                                  Center(
                                     child: Text(
-                                      (loading)?
-                                      "Operation in progress ..."
-                                          :
-                                      "Create your account account !",
+                                      "I agree to the privacy policy",
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
-                                        color:Colors.white,
+                                        color:(!accept)?Colors.red: (pos_y == 1)? Colors.white :(pos_y == 1)? Colors.white : Colors.white38,
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             )
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
+                        if(_visibile_error)
                           Container(
-                              margin: EdgeInsets.only(top: 10),
-                              padding:  EdgeInsets.symmetric(vertical: 5),
-                              child: Text(
-                                "Privacy Policy !",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color:(pos_y == 3)? Colors.white:Colors.white60
+                            width: double.infinity,
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red,width: 0.3),
+                              borderRadius: BorderRadius.circular(5),
+                              color:  Colors.redAccent,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(5.0),
+                                  height: 28,
+                                  width: 28,
+                                  child: Icon(
+                                    Icons.warning,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
                                 ),
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                        _message_error ,
+                                        style: TextStyle(
+                                          color:Colors.white,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                        )
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              pos_y=2;
+                              _goToValidate();
+                            });
+                          },
+                          child: Container(
+                              margin: EdgeInsets.only(top: 10),
+                              height: 45,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                border:Border.all(color: (pos_y == 2)? Colors.white:Colors.deepOrangeAccent,width: 2),
+                                color:Colors.deepOrangeAccent,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  (loading)?
+                                  Container(
+                                      height:40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white10,
+                                          borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(4),topLeft: Radius.circular(4))
+                                      ),
+                                      child: Center(
+                                        child: Container(
+                                            width: 20,
+                                            height: 20,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 2,
+                                            )
+                                        ),
+                                      )
+                                  )
+                                      :
+                                  Container(
+                                      height:40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white10,
+                                          borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(5),topLeft: Radius.circular(5))
+                                      ),
+                                      child: Icon( FontAwesomeIcons.signInAlt ,color:   Colors.white,)
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        (loading)?
+                                        "Operation in progress ..."
+                                            :
+                                        "Create your account account !",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          color:Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               )
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(top: 10),
+                                padding:  EdgeInsets.symmetric(vertical: 5),
+                                child: Text(
+                                  "Privacy Policy !",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color:(pos_y == 3)? Colors.white:Colors.white60
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

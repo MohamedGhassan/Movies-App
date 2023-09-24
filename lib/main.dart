@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_tv/test.dart';
 import 'package:flutter_app_tv/ui/auth/login.dart';
 import 'package:flutter_app_tv/ui/channel/channel_detail.dart';
@@ -14,20 +16,20 @@ import 'package:flutter_app_tv/ui/review/review_add.dart';
 import 'package:flutter_app_tv/ui/review/reviews.dart';
 import 'package:flutter_app_tv/ui/serie/serie.dart';
 import 'package:flutter_app_tv/ui/serie/series.dart';
+import 'package:flutter_app_tv/ui/setting/settings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wakelock/wakelock.dart';
-
+// import 'package:wakelock/wakelock.dart';
 import 'ui/player/video_player.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   // await Firebase.initializeApp();
-  Wakelock.enable();
+  // Wakelock.enable();
   // runApp(
   //   DevicePreview(enabled: true, builder: (context) =>
   //       MyApp()
@@ -65,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
 
-          home: Test(),
+          home: Splash(),
           routes: {
             "/splash": (context) => Splash(),
             "/home": (context) => Home(),
@@ -85,11 +87,7 @@ class _MyAppState extends State<MyApp> {
           },
         );
       },
-      child: Test(),
+      child: Splash(),
     );
   }
-
-
-
-
 }

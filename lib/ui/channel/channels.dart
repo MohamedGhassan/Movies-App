@@ -32,6 +32,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../responsive.dart';
 
+
 /// A [StatelessWidget] which demonstrates
 /// how to consume and interact with a [CounterBloc].
 class Channels extends StatefulWidget {
@@ -475,25 +476,16 @@ class _ChannelsState extends ResumableState<Channels> {
                 Positioned(
                     right: 0,
                     top: Responsive.isMobile(context)
-                        ? MediaQuery
-                        .of(context)
-                        .size
-                        .height / 5.3
-                        : 0,
+                        ? MediaQuery.of(context).size.height / 7.0
+                        : 0.0,
                     // top: 0,
                     left: MediaQuery
                         .of(context)
                         .size
                         .width / 50.sw,
                     bottom: Responsive.isMobile(context)
-                        ? MediaQuery
-                        .of(context)
-                        .size
-                        .height / 2.11
-                        : MediaQuery
-                        .of(context)
-                        .size
-                        .height,
+                        ? MediaQuery.of(context).size.height / 2.15
+                        : MediaQuery.of(context).size.height / 2.15,
                     // bottom: MediaQuery.of(context).size.height / 4,
                     // child:FadeInImage(placeholder: MemoryImage(kTransparentImage),image:(channles.length > 0)? CachedNetworkImageProvider(channles[_focused_channel].image):CachedNetworkImageProvider("null"),fit: BoxFit.cover)
                     child: CachedNetworkImage(

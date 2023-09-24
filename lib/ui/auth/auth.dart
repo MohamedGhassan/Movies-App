@@ -252,55 +252,55 @@ class _AuthState extends ResumableState<Auth> {
       backgroundColor: Colors.black,
       body: RawKeyboardListener(
         focusNode: main_focus_node,
-        onKey: (RawKeyEvent event) {
-          if (event is RawKeyDownEvent &&
-              event.data is RawKeyEventDataAndroid) {
-            RawKeyDownEvent rawKeyDownEvent = event;
-            RawKeyEventDataAndroid rawKeyEventDataAndroid = rawKeyDownEvent
-                .data as RawKeyEventDataAndroid;
-            print("Focus Node 0 ${rawKeyEventDataAndroid.keyCode}");
-            if (facebookloading || googleloading)
-              return;
-            switch (rawKeyEventDataAndroid.keyCode) {
-              case KEY_CENTER:
-                _goToLogin();
-                _goToRegister();
-                _goToGoogle();
-                _goToFacebook();
-                break;
-              case KEY_UP:
-                if (pos_y == 0) {
-                  print("play sound");
-                } else {
-                  pos_y --;
-                }
-                break;
-              case KEY_DOWN:
-                if (pos_y == 3) {
-                  print("play sound");
-                } else {
-                  pos_y ++;
-                }
-                break;
-              case KEY_LEFT:
-                print("play sound");
-                break;
-              case KEY_RIGHT:
-                print("play sound");
-                break;
-              default:
-                break;
-            }
-            setState(() {
-
-            });
-          }
-        },
+        // onKey: (RawKeyEvent event) {
+        //   if (event is RawKeyDownEvent &&
+        //       event.data is RawKeyEventDataAndroid) {
+        //     RawKeyDownEvent rawKeyDownEvent = event;
+        //     RawKeyEventDataAndroid rawKeyEventDataAndroid = rawKeyDownEvent
+        //         .data as RawKeyEventDataAndroid;
+        //     print("Focus Node 0 ${rawKeyEventDataAndroid.keyCode}");
+        //     if (facebookloading || googleloading)
+        //       return;
+        //     switch (rawKeyEventDataAndroid.keyCode) {
+        //       case KEY_CENTER:
+        //         _goToLogin();
+        //         _goToRegister();
+        //         _goToGoogle();
+        //         _goToFacebook();
+        //         break;
+        //       case KEY_UP:
+        //         if (pos_y == 0) {
+        //           print("play sound");
+        //         } else {
+        //           pos_y --;
+        //         }
+        //         break;
+        //       case KEY_DOWN:
+        //         if (pos_y == 3) {
+        //           print("play sound");
+        //         } else {
+        //           pos_y ++;
+        //         }
+        //         break;
+        //       case KEY_LEFT:
+        //         print("play sound");
+        //         break;
+        //       case KEY_RIGHT:
+        //         print("play sound");
+        //         break;
+        //       default:
+        //         break;
+        //     }
+        //     setState(() {
+        //
+        //     });
+        //   }
+        // },
         child: Stack(
           children: [
             FadeInImage(placeholder: MemoryImage(kTransparentImage),
                 image: AssetImage("assets/images/background.jpeg"),
-                fit: BoxFit.cover),
+                fit: BoxFit.cover,height: double.infinity,width: double.infinity,),
             ClipRRect( // Clip it cleanly.
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),

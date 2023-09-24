@@ -338,7 +338,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       ),
     );
   }
-
   void initSettings()async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(prefs.getInt("subtitle_size") == null){
